@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap:10px;
+}
+
+.gender {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.gender p {
+    margin: 0px;
+    margin-right: 15px;
+}
+
+.lang {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.lang p {
+    margin: 0px;
+    margin-right: 15px;
+}
+
+textarea {
+    resize: none;
+  }
