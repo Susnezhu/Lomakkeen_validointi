@@ -10,51 +10,84 @@
     <div class="content">
     <h1>Rekisteröitymislomake</h1>
     <p>Siirry kentästä toiseen tab-näppäimellä.</p>
+    <p>* pakollinen kenttä</p>
 
-    <input type="text" id="idInput" placeholder="Käyttäjä ID">
-    <input type="text" id="PasswordInput" placeholder="Salasana">
-    <input type="text" id="nameInput" placeholder="Nimi">
-    <input type="text" id="addressInput" placeholder="Osoite">
-
-    <select id="country" onchange="checkOther()">
-        <option value="nothing" disabled selected>Valitse maa</option>
-        <option value="fi">Suomi</option>
-        <option value="se">Ruotsi</option>
-        <option value="de">Saksa</option>
-        <option value="fr">Ranska</option>
-        <option value="uk">Iso-Britannia</option>
-        <option value="us">Yhdysvallat</option>
-        <option value="ca">Kanada</option>
-        <option value="cn">Kiina</option>
-        <option value="jp">Japani</option>
-        <option value="kr">Etelä-Korea</option>
-        <option value="it">Italia</option>
-        <option value="es">Espanja</option>
-        <option value="br">Brasilia</option>
-        <option value="au">Australia</option>
-        <option value="in">Intia</option>
-        <option value="country_other">Muu</option>
-    </select>
-    <textarea class="other" id="otherText" placeholder="Muu, mikä?"></textarea>
-
-    <input type="text" id="postNumInput" placeholder="Postinumero">
-    <input type="text" id="mainInput" placeholder="Sähköposti">
-
-    <div class="gender">
-    <p>Sukupuoli:</p>
-    <label><input type="radio" name="choice" value="f">Nainen</label>
-    <label><input type="radio" name="choice" value="m">Mies</label>
+    <div class="required">
+        <input type="text" id="idInput" placeholder="Käyttäjä ID">
+        <p>*</p>
     </div>
 
-    <div class="lang">
-    <p>Kieli:</p>
-    <label><input type="checkbox" value="lang_fi" class="option">suomi</label>
-    <label><input type="checkbox" value="lang_other" class="option">Muu kuin suomi</label>
+    <div class="required">
+        <input type="text" id="passwordInput" placeholder="Salasana">
+        <p>*</p>
+    </div>
+
+    <div class="required">
+        <input type="text" id="nameInput" placeholder="Nimi">
+        <p>*</p>
+    </div>
+
+    <div class="required">
+        <input type="text" id="addressInput" placeholder="Osoite">
+        <p>*</p>
+    </div>
+
+    <div class="required">
+        <select id="country" onchange="checkOther()">
+            <option value="nothing" disabled selected>Valitse maa</option>
+            <option value="fi">Suomi</option>
+            <option value="se">Ruotsi</option>
+            <option value="de">Saksa</option>
+            <option value="fr">Ranska</option>
+            <option value="uk">Iso-Britannia</option>
+            <option value="us">Yhdysvallat</option>
+            <option value="ca">Kanada</option>
+            <option value="cn">Kiina</option>
+            <option value="jp">Japani</option>
+            <option value="kr">Etelä-Korea</option>
+            <option value="it">Italia</option>
+            <option value="es">Espanja</option>
+            <option value="br">Brasilia</option>
+            <option value="au">Australia</option>
+            <option value="in">Intia</option>
+            <option value="country_other">Muu</option>
+        </select>
+        <p>*</p>
+    </div>
+
+    <textarea class="other" id="otherText" placeholder="Muu, mikä?"></textarea>
+
+    <div class="required">
+        <input type="text" id="postNumInput" placeholder="Postinumero">
+        <p>*</p>
+    </div>
+
+    <div class="required">
+        <input type="text" id="emailInput" placeholder="Sähköposti">
+        <p>*</p>
+    </div>
+
+    <div class="required">
+        <div class="gender">
+            <p>Sukupuoli:</p>
+            <label><input type="radio" name="choice" value="F">Nainen</label>
+            <label><input type="radio" name="choice" value="M">Mies</label>
+        </div>
+        <p>*</p>
+    </div>
+
+    <div class="required">
+        <div class="lang">
+            <p>Kieli:</p>
+            <label><input type="checkbox" value="lang_fi" class="option">suomi</label>
+            <label><input type="checkbox" value="lang_other" class="option">Muu kuin suomi</label>
+        </div>
+        <p>*</p>
     </div>
 
     <button class="check" onclick="checkValues()">Lähetä</button>
 
-    <textarea class="moreInfo" placeholder="Lisätietoja"></textarea>
+    <textarea id="moreInfo" class="moreInfo" placeholder="Lisätietoja"></textarea>
 
     </div>
 
