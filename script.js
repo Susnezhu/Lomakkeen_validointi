@@ -24,32 +24,85 @@ function checkValues() {
     let lang = document.querySelectorAll('.lang .option');
     let moreInfo = document.getElementById("moreInfo");
 
+    let alerting = document.getElementById("alerting");
+
     let fields = [id, password, name, address, country, postNum, email];
 
     for (let field of fields) {
         if (field.value == "" || field.value == "nothing") {
-            alert("Täytä kaikki pakolliset kentät!");
+            alerting.innerText = "Täytä kaikki pakolliset kentät! *";
             return;
         }
     }
 
     if (!gender) {
-        alert("Täytä kaikki pakolliset kentät!");
+        alerting.innerText = "Täytä kaikki pakolliset kentät! *";
         return;
     }
 
     let isLanguageSelected = Array.from(lang).some(language => language.checked);
 
     if (!isLanguageSelected) {
-        alert("Täytä kaikki pakolliset kentät!");
+        alerting.innerText = "Täytä kaikki pakolliset kentät! *";
         return;
     }
 
-    checkAgain();
+    checkAgain(id.value.trim(), password.value, postNum.value.trim(),email.value, alerting);
 }
 
 
-function checkAgain() {
-    alert("kaikki kentät täytetty")
-    //taskistaa onko kaikki kirjoitettu oikein ja oikeissa muodoissa
+//taskistaa onko kaikki kirjoitettu oikein ja oikeissa muodoissa
+function checkAgain(id, password, postNum,email, alerting) {
+    alerting.innerText = "";
+
+    //ID tarkistus:
+    if (id.length < 6) {
+        alerting.innerText = "ID pitää olla vähintään 6 merkkiä pitkä";
+        return
+    }
+
+
+    //salasanan tarkistus:
+    let errorMessages = [];
+
+    if (password.length < 6) {
+      errorMessages.push("Salasanan pitää olla 6 merkkiä pitkä");
+    }
+    
+    if (!/[1234567890]/.test(password)) {
+      errorMessages.push("Salasanassa pitää sisältää numero");
+    }
+    
+    if (!/[ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ]/.test(password)) {
+      errorMessages.push("Salasanassa pitää sisältää iso kirjain");
+    }
+    
+    if (!/[!@£$€&%#]/.test(password)) {
+      errorMessages.push("Salasanassa pitää sisältää erikoismerkki: !@£$€&%#");
+
+    }
+    
+    if (errorMessages.length > 0) {
+      alerting.innerText = errorMessages.join("\n");
+      return
+    }
+
+
+    //postinumero tarkistus:
+    if (postNum.length != 5) {
+        alerting.innerText = "Postinumerossa pitää olla 5 numeroa"
+        return
+    }
+
+
+    //sähköpostin tarkistus:
+    if (email.indexOf('@') === -1 || email.indexOf('.') === -1 || email.indexOf('@') > email.indexOf('.')) {
+        alerting.innerText = "Sähköpostiosoitteen tulee olla sähköpostiosoitteen muotoinen.";
+        return
+      }
+
+
+    //viesti, jos kaikki oikein
+    alerting.style.color = "black";
+    alerting.innerText = "Kaikki tiedot oikein, kiitos!";
 }

@@ -10,7 +10,7 @@
     <div class="content">
     <h1>Rekisteröitymislomake</h1>
     <p>Siirry kentästä toiseen tab-näppäimellä.</p>
-    <p>* pakollinen kenttä</p>
+    <p>Pakolliset kentät *</p>
 
     <div class="required">
         <input type="text" id="idInput" placeholder="Käyttäjä ID">
@@ -85,9 +85,12 @@
         <p>*</p>
     </div>
 
+    <textarea id="moreInfo" class="moreInfo" placeholder="Lisätietoja"></textarea>
+
     <button class="check" onclick="checkValues()">Lähetä</button>
 
-    <textarea id="moreInfo" class="moreInfo" placeholder="Lisätietoja"></textarea>
+    <p id="alerting" class="error"></p>
+
 
     </div>
 
