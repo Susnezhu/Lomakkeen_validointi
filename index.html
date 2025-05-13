@@ -13,22 +13,22 @@
     <p>Pakolliset kentät *</p>
 
     <div class="required">
-        <input type="text" id="idInput" placeholder="Käyttäjä ID">
+        <input type="text" id="idInput" placeholder="Käyttäjä ID" title="Käyttäjä ID">
         <p>*</p>
     </div>
 
     <div class="required">
-        <input type="text" id="passwordInput" placeholder="Salasana">
+        <input type="text" id="passwordInput" placeholder="Salasana" title="Salasana">
         <p>*</p>
     </div>
 
     <div class="required">
-        <input type="text" id="nameInput" placeholder="Nimi">
+        <input type="text" id="nameInput" placeholder="Nimi" title="Nimi">
         <p>*</p>
     </div>
 
     <div class="required">
-        <input type="text" id="addressInput" placeholder="Osoite">
+        <input type="text" id="addressInput" placeholder="Osoite" title="Osoite">
         <p>*</p>
     </div>
 
@@ -55,15 +55,15 @@
         <p>*</p>
     </div>
 
-    <textarea class="other" id="otherText" placeholder="Muu, mikä?"></textarea>
+    <textarea class="other" id="otherText" placeholder="Muu, mikä?" title="Muu maa"></textarea>
 
     <div class="required">
-        <input type="text" id="postNumInput" placeholder="Postinumero">
+        <input type="text" id="postNumInput" placeholder="Postinumero" title="Postinumero">
         <p>*</p>
     </div>
 
     <div class="required">
-        <input type="text" id="emailInput" placeholder="Sähköposti">
+        <input type="text" id="emailInput" placeholder="Sähköposti" title="Sähköposti">
         <p>*</p>
     </div>
 
@@ -85,9 +85,9 @@
         <p>*</p>
     </div>
 
-    <textarea id="moreInfo" class="moreInfo" placeholder="Lisätietoja"></textarea>
+    <textarea id="moreInfo" class="moreInfo" placeholder="Lisätietoja" title="Lisätietoja"></textarea>
 
-    <button class="check" onclick="checkValues()">Lähetä</button>
+    <button class="check" id="send">Lähetä</button>
 
     <p id="alerting" class="error"></p>
 

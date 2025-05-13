@@ -1,32 +1,48 @@
+//Kaikki kentät
+const id = document.getElementById("idInput");
+const password = document.getElementById("passwordInput");
+const name = document.getElementById("nameInput");
+const address = document.getElementById("addressInput");
+const country = document.getElementById("country");
+const postNum = document.getElementById("postNumInput");
+const email = document.getElementById("emailInput");
+const moreInfo = document.getElementById("moreInfo");
+
+//Viesti käyttäjälle punaisella
+let alerting = document.getElementById("alerting");
+
+//muu maa ja tekstilokero
+const select = document.getElementById("country");
+const textarea = document.getElementById("otherText");
+
+const sendBtn = document.getElementById("send");
+
+const fields = [id, password, name, address, country, postNum, email];
+
 //laittaa kentän "muu, mikä" piiloon ja näyttää, jos on valittu
-function checkOther() {
-    let select = document.getElementById("country");
-    let textarea = document.getElementById("otherText");
-
+function countryFieldMore() {
     if (select.value === "country_other") {
-      textarea.style.display = "block";
+        textarea.style.display = "block";
     } else {
-      textarea.style.display = "none";
+        textarea.style.display = "none";
     }
-  }
-checkOther(); //kun sivu avautuu, piilottaa kentän: "muu, mikä"
+}
 
-function checkValues() {
-    let id = document.getElementById("idInput");
-    let password = document.getElementById("passwordInput");
-    let name = document.getElementById("nameInput");
-    let address = document.getElementById("addressInput");
-    let country = document.getElementById("country");
-    let postNum = document.getElementById("postNumInput");
-    let email = document.getElementById("emailInput");
+countryFieldMore(); //kun sivu avautuu, piilottaa kentän: "muu, mikä"
 
-    let gender = document.querySelector('input[name="choice"]:checked');
-    let lang = document.querySelectorAll('.lang .option');
-    let moreInfo = document.getElementById("moreInfo");
+function showErrorField(field, value) {
+    if (value) {
+        field.style.border = "2px solid red";
+    } else {
+        field.style.border = "1px solid black";
+    }
+}
 
-    let alerting = document.getElementById("alerting");
-
-    let fields = [id, password, name, address, country, postNum, email];
+//tarkistaa, onko kenttä tyhjä
+function checkEmptyField() {
+    //saa uudet arvot, kun käyttäjä valitsee ja painaa lähetä
+    const gender = document.querySelector('input[name="choice"]:checked');
+    const lang = document.querySelectorAll('.lang .option');
 
     for (let field of fields) {
         if (field.value == "" || field.value == "nothing") {
@@ -47,62 +63,73 @@ function checkValues() {
         return;
     }
 
-    checkAgain(id.value.trim(), password.value, postNum.value.trim(),email.value, alerting);
+    checkFields();
 }
 
 
 //taskistaa onko kaikki kirjoitettu oikein ja oikeissa muodoissa
-function checkAgain(id, password, postNum,email, alerting) {
+function checkFields() {
     alerting.innerText = "";
+    alerting.style.color = "red";
 
-    //ID tarkistus:
-    if (id.length < 6) {
-        alerting.innerText = "ID pitää olla vähintään 6 merkkiä pitkä";
-        return
-    }
-
-
-    //salasanan tarkistus:
+    
     let errorMessages = [];
 
-    if (password.length < 6) {
-      errorMessages.push("Salasanan pitää olla 6 merkkiä pitkä");
+    showErrorField(password, false);
+    //salasanan tarkistus:
+    if (password.value.length < 6) {
+        errorMessages.push("Salasanan pitää olla 6 merkkiä pitkä");
+        showErrorField(password, true);
     }
     
-    if (!/[1234567890]/.test(password)) {
-      errorMessages.push("Salasanassa pitää sisältää numero");
+    if (!/[1234567890]/.test(password.value)) {
+        errorMessages.push("Salasanassa pitää sisältää numero");
+        showErrorField(password, true);
     }
     
-    if (!/[ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ]/.test(password)) {
-      errorMessages.push("Salasanassa pitää sisältää iso kirjain");
+    if (!/[ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ]/.test(password.value)) {
+        errorMessages.push("Salasanassa pitää sisältää iso kirjain");
+        showErrorField(password, true);
     }
     
-    if (!/[!@£$€&%#]/.test(password)) {
-      errorMessages.push("Salasanassa pitää sisältää erikoismerkki: !@£$€&%#");
+    if (!/[!@£$€&%#]/.test(password.value)) {
+        errorMessages.push("Salasanassa pitää sisältää erikoismerkki: !@£$€&%#");
+        showErrorField(password, true);
+    }
 
+    showErrorField(id, false);
+    //id tarkistus
+    if (id.value.trim().length < 6) {
+        errorMessages.push("ID pitää olla vähintään 6 merkkiä pitkä");
+        showErrorField(id, true);
+    }
+
+    showErrorField(postNum, false);
+    //postinumero tarkistus:
+    if (postNum.value.trim().length != 5) {
+        errorMessages.push( "Postinumerossa pitää olla 5 numeroa");
+        showErrorField(postNum, true);
+    }
+
+    showErrorField(email, false);
+    //sähköpostin tarkistus:
+    if (email.value.indexOf('@') === -1 || email.value.indexOf('.') === -1 || email.value.indexOf('@') > email.value.indexOf('.')) {
+        errorMessages.push("Sähköpostiosoitteen tulee olla sähköpostiosoitteen muotoinen.");
+        showErrorField(email, true);
     }
     
     if (errorMessages.length > 0) {
-      alerting.innerText = errorMessages.join("\n");
-      return
+        alerting.innerText = errorMessages.join("\n");
+        return;
     }
-
-
-    //postinumero tarkistus:
-    if (postNum.length != 5) {
-        alerting.innerText = "Postinumerossa pitää olla 5 numeroa"
-        return
-    }
-
-
-    //sähköpostin tarkistus:
-    if (email.indexOf('@') === -1 || email.indexOf('.') === -1 || email.indexOf('@') > email.indexOf('.')) {
-        alerting.innerText = "Sähköpostiosoitteen tulee olla sähköpostiosoitteen muotoinen.";
-        return
-      }
-
+    
 
     //viesti, jos kaikki oikein
     alerting.style.color = "black";
     alerting.innerText = "Kaikki tiedot oikein, kiitos!";
+}
+
+
+sendBtn.onclick = function() {
+    checkEmptyField()
 }
