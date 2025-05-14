@@ -29,6 +29,7 @@ function countryFieldMore() {
 }
 
 countryFieldMore(); //kun sivu avautuu, piilottaa kentän: "muu, mikä"
+select.addEventListener("change", countryFieldMore); //tarkistaa ja avaa kentä "muu, mikä", jos se on valittu
 
 function showErrorField(field, value) {
     if (value) {
